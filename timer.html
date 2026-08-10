@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Study Timer</title>
+
+    <style>
+        body {
+            font-family: Arial;
+            text-align: center;
+            background: #f4f6f8;
+            padding-top: 100px;
+        }
+
+        .timer {
+            background: white;
+            width: 350px;
+            margin: auto;
+            padding: 40px;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px #ddd;
+        }
+
+        h1 {
+            color: #2563eb;
+        }
+
+        #time {
+            font-size: 60px;
+            margin: 30px;
+        }
+
+        button {
+            padding: 12px 20px;
+            margin: 5px;
+            border: none;
+            border-radius: 6px;
+            background: #2563eb;
+            color: white;
+            cursor: pointer;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="timer">
+
+        <h1>Study Timer</h1>
+
+        <div id="time">25:00</div>
+
+        <button onclick="startTimer()">Start</button>
+        <button onclick="resetTimer()">Reset</button>
+
+    </div>
+
+    <script>
+        let seconds = 25 * 60;
+        let timer;
+
+        function startTimer() {
+            clearInterval(timer);
+
+            timer = setInterval(function() {
+
+                if (seconds <= 0) {
+                    clearInterval(timer);
+                    alert("Study session complete!");
+                    return;
+                }
+
+                seconds--;
+                displayTime();
+
+            }, 1000);
+        }
+
+        function resetTimer() {
+            clearInterval(timer);
+            seconds = 25 * 60;
+            displayTime();
+        }
+
+        function displayTime() {
+            let minutes = Math.floor(seconds / 60);
+            let remaining = seconds % 60;
+
+            document.getElementById("time").innerText =
+                String(minutes).padStart(2, "0") + ":" +
+                String(remaining).padStart(2, "0");
+        }
+    </script>
+
+</body>
+</html>
